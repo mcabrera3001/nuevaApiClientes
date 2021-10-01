@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace nuevaApiClientes.Models
 {
-    public class clientes
+    public class Clientes
     {
         [Key]
-        public int id_cliente { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string dni { get; set; }
-        public string domicilio { get; set; }
-        public string telefono { get; set; }
-        public int posnet { get; set; }
+        public int Id_Cliente { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Dni { get; set; }
+        public string Domicilio { get; set; }
+        public string Telefono { get; set; }
+        public int Posnet { get; set; }
 
     }
 }

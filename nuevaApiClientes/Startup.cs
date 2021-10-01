@@ -23,7 +23,8 @@ namespace nuevaApiClientes
         {
 
             services.AddControllers();
-            services.AddDbContext<clientesContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            services.AddDbContext<ClientesContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            services.AddDbContext<cuenta_corrienteContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Conexion")));
 
         }
 

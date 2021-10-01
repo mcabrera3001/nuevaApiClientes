@@ -8,18 +8,18 @@ using System.Data.SqlClient;
 
 namespace nuevaApiClientes.Context
 {
-        public class clientesContext : DbContext
+        public class ClientesContext : DbContext
         {
-        public clientesContext(DbContextOptions<clientesContext> options) : base(options)
+        public ClientesContext(DbContextOptions<ClientesContext> options) : base(options)
             {
 
             }
-            public DbSet<clientes> clientes { get; set; }
+            public DbSet<Clientes> Clientes { get; set; }
 
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
                 {
-                    modelBuilder.Entity<clientes>().ToTable("clientes");
+                    modelBuilder.Entity<Clientes>().ToTable("clientes");
                     //modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
                     //modelBuilder.Entity<Student>().ToTable("Student");
                 }

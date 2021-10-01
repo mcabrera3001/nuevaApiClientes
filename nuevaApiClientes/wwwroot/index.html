@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Trocadero</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Trocadero</h1>
+
+    <h3>Buscar Cliente</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="getClientes1()">
+        <input type="text" id="cliente">
+        <input type="submit" value="Buscar"> 
+    </form>
+
+    <table class="table" id="lista-clientes">
+        <thead>
+            <tr>
+                <th scope="col">DNI</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+
+    </table>
+
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Is Complete?</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody id="todos"></tbody>
+    </table>
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="json/javascript">getItems();</script>
+
+
+</body>
+</html>
