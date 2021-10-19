@@ -13,12 +13,12 @@ namespace nuevaApiClientes.Context
         {
 
         }
-        public DbSet<cuenta_corriente> cuenta_corriente { get; set; }
+        public DbSet<account> cuenta_corriente { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<cuenta_corriente>().ToTable("cuenta_corriente");
+            modelBuilder.Entity<account>().ToTable("cuenta_corriente");
 
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace nuevaApiClientes.Models
 {
-    public class cuenta_corriente
+    public class account
     {
         [Key]
         public int id_cuenta_corriente { get; set; }

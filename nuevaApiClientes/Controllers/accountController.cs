@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace nuevaApiClientes.Controllers
 {
-    [Route("api/cuenta_corriente")]
+    [Route("api/account")]
     [ApiController]
-    public class cuenta_corrienteController : ControllerBase
+    public class accountController : ControllerBase
     {
         private readonly cuenta_corrienteContext _context;
 
-        public cuenta_corrienteController(cuenta_corrienteContext context)  //CONSTRUCTOR PARA EL CONTROLADOR
+        public accountController(cuenta_corrienteContext context)  //CONSTRUCTOR PARA EL CONTROLADOR
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<cuenta_corriente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<account>>> GetClientes()
         {
             return await _context.cuenta_corriente.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<cuenta_corriente>> Getclientes(int id)
+        public async Task<ActionResult<account>> Getclientes(int id)
         {
             var cuenta_corriente = await _context.cuenta_corriente.FindAsync(id);
 

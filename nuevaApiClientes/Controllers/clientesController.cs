@@ -33,14 +33,14 @@ namespace nuevaApiClientes.Controllers
         }
 
         // GET: api/clientes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Clientes>>> GetClientes()
+        //[HttpGet]
+        /*public async Task<ActionResult<IEnumerable<Clientes>>> GetClientes()
         {
             return await _context.Clientes.ToListAsync();
-        }
+        }*/
 
         // GET: api/clientes/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Clientes>> GetClientes(int id)
         {
             var Clientes = await _context.Clientes.FindAsync(id);
@@ -51,21 +51,58 @@ namespace nuevaApiClientes.Controllers
             }
 
             return Clientes;
-        }
+        }*/
 
-        [HttpGet("posnet/{id}")]
-        public async Task<ActionResult<Clientes>> GetClientesConPosnet(int id)
+        [HttpGet("Get")]
+        public async Task<ActionResult<Clientes>> Get([FromQuery] int posnet, [FromQuery] string nombre, [FromQuery] string apellido)
         {
 
             var contextOptions = new DbContextOptionsBuilder<ClientesContext>()
-            .UseSqlServer(@"Server = DESKTOP-NA2R6AM\MSQLSERVER; Database = Trocadero; user id = sa; password = mauro3001;
+            .UseSqlServer(@"Server = DESKTOP-NA2R6AM\MSQLSERVER; Database = trocadero; user id = sa; password = mauro3001;
                                 MultipleActiveResultSets = true; Trusted_Connection = True")
             .Options;
 
             using (var db = new ClientesContext(contextOptions))
             {
-                var cl = from client in db.Clientes
-                         where client.Posnet == id
+
+                if (nombre != null && apellido != null) // filtra por nombre y apellido del cliente
+                {
+                    var cliente = from client in db.Clientes
+                                  where client.Nombre == nombre && client.Apellido == apellido
+                                  select new
+                                  {
+                                      id_cliente = client.Id_Cliente,
+                                      nombre = client.Nombre,
+                                      apellido = client.Apellido,
+                                      dni = client.Dni,
+                                      domicilio = client.Domicilio,
+                                      telefono = client.Telefono,
+                                      posnet = client.Posnet
+                                  };
+
+                    return Ok(await cliente.ToListAsync());
+
+                }
+
+                if (posnet == 0) //retorna todos los clientes
+                {
+                    var AllClient = from client in db.Clientes
+                                    select new
+                                    {
+                                        id_cliente = client.Id_Cliente,
+                                        nombre = client.Nombre,
+                                        apellido = client.Apellido,
+                                        dni = client.Dni,
+                                        domicilio = client.Domicilio,
+                                        telefono = client.Telefono,
+                                        posnet = client.Posnet
+                                    };
+
+                    return Ok(await AllClient.ToListAsync());
+                }
+
+                var cl = from client in db.Clientes //filtra clientes por id
+                         where client.Posnet == posnet
                          select new { id_cliente = client.Id_Cliente, nombre = client.Nombre, apellido = client.Apellido, 
                              dni = client.Dni, domicilio = client.Domicilio, telefono = client.Telefono, posnet = client.Posnet };
 
@@ -73,6 +110,7 @@ namespace nuevaApiClientes.Controllers
 
             }
         }
+
 
         // PUT: api/clientes/5
         [HttpPut("{id}")]
@@ -106,7 +144,7 @@ namespace nuevaApiClientes.Controllers
 
         // POST: api/clientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        /*[HttpPost]
         public async Task<ActionResult<Clientes>> Postclientes(Clientes clientes)
         {
             _context.Clientes.Add(clientes);
@@ -114,7 +152,7 @@ namespace nuevaApiClientes.Controllers
 
             return CreatedAtAction(nameof(GetClientes), new { id = clientes.Id_Cliente }, clientes);
 
-        }
+        }*/
 
         // DELETE: api/clientes/5
         [HttpDelete("{id}")]
